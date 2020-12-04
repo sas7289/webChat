@@ -92,7 +92,12 @@ public class ClientHandler {
                 return;
             }
             else if(message.startsWith(PRIVATE_MSG_PREFIX)){
-                //TODO
+                String[] partsMessage = message.split(String.format("\\s+", 3));
+                for (ClientHandler client : myServer.getClients()) {
+                    if(client.getUsername().equals(partsMessage[1])) {
+                        client.sendMessage(username, "[Приватное сообщение] " + partsMessage[2]);
+                    }
+                }
             }
             else {
                 myServer.broadcastMessage(message, this, false);

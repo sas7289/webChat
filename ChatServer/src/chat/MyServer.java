@@ -76,6 +76,10 @@ public class MyServer {
 
     }
 
+    public List<ClientHandler> getClients() {
+        return clients;
+    }
+
     public void broadcastMessage(String message, ClientHandler sender, boolean isServerInfoMsg) throws IOException {
         for (ClientHandler client : clients) {
             if(client == sender) {
