@@ -49,6 +49,7 @@ public class ClientHandler {
 
     }
 
+    //комментарий
     private void authentication() throws IOException {
         String message = in.readUTF();
 
@@ -83,6 +84,7 @@ public class ClientHandler {
         }
 
     }
+
 
     private void readMessage() throws IOException {
         while (true) {
