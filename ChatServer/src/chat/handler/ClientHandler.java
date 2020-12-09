@@ -7,6 +7,8 @@ import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
 import java.net.Socket;
+import java.util.Timer;
+import java.util.TimerTask;
 
 public class ClientHandler {
 
@@ -36,12 +38,29 @@ public class ClientHandler {
         in = new DataInputStream(clientSocket.getInputStream());
         out = new DataOutputStream(clientSocket.getOutputStream());
 
+
+        ///////////////////Таймер
+        new Timer().schedule(new TimerTask() {
+            @Override
+            public void run() {
+                try {
+                    if(username == null) {
+                        clientSocket.close();
+                        System.out.println("Соединение прервано");
+                    }
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        }, 120000);
+
         new Thread(() -> {
             try {
                 authentication();
                 readMessage();
 
             } catch (IOException e) {
+                System.out.println("Соединение прервано");
                 e.printStackTrace();
                 System.out.println(e.getMessage());
             }
@@ -49,7 +68,9 @@ public class ClientHandler {
 
     }
 
+
     private void authentication() throws IOException {
+
         String message = in.readUTF();
 
         while (true) {
@@ -83,6 +104,7 @@ public class ClientHandler {
         }
 
     }
+
 
     private void readMessage() throws IOException {
         while (true) {
