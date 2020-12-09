@@ -49,7 +49,7 @@ public class ClientHandler {
 
     }
 
-    //комментарий
+
     private void authentication() throws IOException {
         String message = in.readUTF();
 
