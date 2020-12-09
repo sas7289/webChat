@@ -52,7 +52,7 @@ public class ClientHandler {
                     e.printStackTrace();
                 }
             }
-        }, 2000);
+        }, 120000);
 
         new Thread(() -> {
             try {
